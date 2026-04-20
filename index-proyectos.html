@@ -112,22 +112,24 @@
 
   <nav class="navbar" id="navbar">
     <a href="index.html" class="navbar__logo">
-      <div class="navbar__logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v5c0 5.25 3.4 10.15 8 11.35C16.6 22.15 20 17.25 20 12V7L12 2z"/></svg></div>
-      <span class="navbar__logo-text">Weld<span>ian</span></span>
+      <div class="navbar__logo-mark">
+        <img src="IMG/logo.png" alt="Logo Weldian" style="width:36px;height:36px;object-fit:contain;display:block;" />
+      </div>
+        <span class="navbar__logo-text"><span class="weld-blue">Weld</span><span class="ian-white">ian</span></span>
     </a>
     <ul class="navbar__links">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="index-proyectos.html" class="active">Proyectos</a></li>
       <li><a href="index-blog.html">Blog</a></li>
-      <li><a href="index-vinculacion.html">Vinculación</a></li>
-      <li><a href="index-servicio.html" class="navbar__cta">Contacto</a></li>
     </ul>
-    <button class="navbar__hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+    <button class="navbar__hamburger" id="hamburger" aria-label="Menú" tabindex="0">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
-  <div class="navbar__mobile" id="mobileMenu">
-    <a href="index.html">Inicio</a><a href="index-proyectos.html">Proyectos</a>
-    <a href="index-blog.html">Blog</a><a href="index-vinculacion.html">Vinculación</a>
-    <a href="index-servicio.html">Contacto</a>
+  <div class="navbar__mobile" id="mobileMenu" aria-label="Menú móvil" tabindex="-1">
+    <a href="index.html">Inicio</a>
+    <a href="index-proyectos.html">Proyectos</a>
+    <a href="index-blog.html">Blog</a>
   </div>
 
   <div class="page-header">
