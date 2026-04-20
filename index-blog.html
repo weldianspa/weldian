@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Weldian</title>
+  <meta name="description" content="Noticias, avisos y novedades de Weldian. Enterate de nuestros proyectos, logros y actualizaciones." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+    .blog-main { }
+    .blog-sidebar { }
+
+    /* Post destacado */
+    .post-featured {
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--gris-borde);
+      margin-bottom: 40px;
+      transition: box-shadow var(--transicion);
+    }
+    .post-featured:hover { box-shadow: 0 8px 40px rgba(28,38,56,.09); }
+    .post-featured__thumb {
+      aspect-ratio: 16/7;
+      background: linear-gradient(135deg, #1C2638, #2d4565);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.2); font-size: .8rem; letter-spacing: .1em;
+    }
+    .post-featured__body { padding: 32px; }
+    .post-featured__cat {
+      display: inline-block;
+      background: var(--dorado); color: var(--blanco);
+      font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 100px; margin-bottom: 12px;
+    }
+    .post-featured__title {
+      font-family: var(--fuente-display); font-size: 1.5rem;
+      line-height: 1.2; margin-bottom: 12px;
+    }
+    .post-featured__excerpt { font-size: .92rem; color: var(--gris-oscuro); line-height: 1.75; margin-bottom: 20px; }
+    .post-meta { display: flex; gap: 16px; font-size: .78rem; color: var(--gris-oscuro); align-items: center; flex-wrap: wrap; }
+    .post-meta__dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gris-borde); }
+
+    /* Post card normal */
+    .post-card {
+      display: grid; grid-template-columns: 120px 1fr;
+      gap: 20px; border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 24px; margin-bottom: 24px;
+      transition: opacity var(--transicion);
+    }
+    .post-card:hover { opacity: .8; }
+    .post-card:last-child { border-bottom: none; }
+    .post-card__thumb {
+      border-radius: 6px; overflow: hidden;
+      background: linear-gradient(135deg, #1C2638, #3a5070);
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.2); font-size: .6rem;
+    }
+    .post-card__cat {
+      font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--dorado); margin-bottom: 6px;
+    }
+    .post-card__title {
+      font-family: var(--fuente-display); font-size: 1rem;
+      line-height: 1.3; margin-bottom: 8px; color: var(--azul);
+    }
+    .post-card__date { font-size: .75rem; color: var(--gris-oscuro); }
+
+    /* Sidebar */
+    .sidebar-widget {
+      background: var(--gris-claro); border-radius: 8px;
+      padding: 28px; margin-bottom: 28px;
+    }
+    .sidebar-widget__title {
+      font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--azul); margin-bottom: 20px;
+      padding-bottom: 12px; border-bottom: 2px solid var(--dorado);
+    }
+    .sidebar-aviso {
+      background: var(--azul); color: var(--blanco);
+      border-radius: 8px; padding: 28px; margin-bottom: 28px;
+    }
+    .sidebar-aviso__badge {
+      display: inline-block; background: var(--dorado);
+      font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 4px; margin-bottom: 12px;
+    }
+    .sidebar-aviso h3 {
+      font-family: var(--fuente-display); font-size: 1.05rem;
+      color: var(--blanco); margin-bottom: 10px;
+    }
+    .sidebar-aviso p { font-size: .85rem; color: rgba(255,255,255,.65); line-height: 1.7; }
+    .category-list { display: flex; flex-direction: column; gap: 10px; }
+    .category-list a {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .88rem; color: var(--gris-oscuro);
+      padding: 8px 0; border-bottom: 1px solid var(--gris-borde);
+      transition: color var(--transicion);
+    }
+    .category-list a:hover { color: var(--dorado); }
+    .category-list a span {
+      background: var(--blanco); border-radius: 100px;
+      font-size: .72rem; padding: 2px 9px; color: var(--gris-oscuro);
+    }
+
+    @media (max-width: 860px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-sidebar { order: -1; }
+    }
+    @media (max-width: 540px) {
+      .post-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="navbar__logo">
+      <div class="navbar__logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v5c0 5.25 3.4 10.15 8 11.35C16.6 22.15 20 17.25 20 12V7L12 2z"/></svg></div>
+      <span class="navbar__logo-text">Weld<span>ian</span></span>
+    </a>
+    <ul class="navbar__links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index-proyectos.html">Proyectos</a></li>
+      <li><a href="index-blog.html" class="active">Blog</a></li>
+      <li><a href="index-vinculacion.html">Vinculación</a></li>
+      <li><a href="index-servicio.html" class="navbar__cta">Contacto</a></li>
+    </ul>
+    <button class="navbar__hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="navbar__mobile" id="mobileMenu">
+    <a href="index.html">Inicio</a><a href="index-proyectos.html">Proyectos</a>
+    <a href="index-blog.html">Blog</a><a href="index-vinculacion.html">Vinculación</a>
+    <a href="index-servicio.html">Contacto</a>
+  </div>
+
+  <div class="page-header">
+    <p class="page-header__label">Novedades</p>
+    <h1 class="page-header__title">Blog Weldian</h1>
+    <p class="page-header__desc">Noticias, avisos, logros y actualizaciones del mundo Weldian y la industria de la soldadura.</p>
+  </div>
+
+  <section class="section">
+    <div class="blog-grid">
+
+      <!-- COLUMNA PRINCIPAL -->
+      <div class="blog-main">
+
+        <!-- Post destacado -->
+        <div class="post-featured fade-up">
+          <div class="post-featured__thumb">
+            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Post destacado ejemplo" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="post-featured__body">
+            <span class="post-featured__cat">📢 Aviso oficial</span>
+            <h2 class="post-featured__title">Weldian amplía su taller y suma nueva tecnología de corte CNC</h2>
+            <p class="post-featured__excerpt">Nos alegra anunciar la expansión de nuestras instalaciones en 600 m² adicionales y la incorporación de una mesa de corte CNC plasma de última generación. Esto nos permitirá ofrecer tiempos de respuesta más cortos y mayor precisión en piezas metálicas.</p>
+            <div class="post-meta">
+              <span>12 de enero, 2025</span>
+              <div class="post-meta__dot"></div>
+              <span>Equipo Weldian</span>
+              <div class="post-meta__dot"></div>
+              <span>4 min de lectura</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Posts normales -->
+        <div class="post-card fade-up">
+          <div class="post-card__thumb">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Post ejemplo 1" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div>
+            <p class="post-card__cat">Logros</p>
+            <h3 class="post-card__title">Superamos los 150 proyectos entregados con 0 accidentes laborales</h3>
+            <p class="post-card__date">5 de enero, 2025</p>
+          </div>
+        </div>
+
+        <div class="post-card fade-up">
+          <div class="post-card__thumb">img</div>
+                  <div class="post-card__thumb">
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Post ejemplo 2" style="width:100%;height:100%;object-fit:cover;" />
+                  </div>
+                  <div class="post-card__thumb">
+                    <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=600&q=80" alt="Post ejemplo 3" style="width:100%;height:100%;object-fit:cover;" />
+                  </div>
+                  <div class="post-card__thumb">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Post ejemplo 4" style="width:100%;height:100%;object-fit:cover;" />
+                  </div>
+                  <div class="post-card__thumb">
+                    <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3a8b?auto=format&fit=crop&w=600&q=80" alt="Post ejemplo 5" style="width:100%;height:100%;object-fit:cover;" />
+                  </div>
+          <div>
+            <p class="post-card__cat">Industria</p>
+            <h3 class="post-card__title">¿Qué es el proceso FCAW y cuándo conviene usarlo?</h3>
+            <p class="post-card__date">28 de diciembre, 2024</p>
+          </div>
+        </div>
+
+        <div class="post-card fade-up">
+          <div class="post-card__thumb">img</div>
+          <div>
+            <p class="post-card__cat">Vinculación</p>
+            <h3 class="post-card__title">Weldian se une al programa de empleo juvenil en alianza con SENCE</h3>
+            <p class="post-card__date">18 de diciembre, 2024</p>
+          </div>
+        </div>
+
+        <div class="post-card fade-up">
+          <div class="post-card__thumb">img</div>
+          <div>
+            <p class="post-card__cat">Equipo</p>
+            <h3 class="post-card__title">Bienvenidos al nuevo equipo de inspección y control de calidad</h3>
+            <p class="post-card__date">10 de diciembre, 2024</p>
+          </div>
+        </div>
+
+        <div class="post-card fade-up">
+          <div class="post-card__thumb">img</div>
+          <div>
+            <p class="post-card__cat">Aviso</p>
+            <h3 class="post-card__title">Horarios de atención durante temporada estival 2024–2025</h3>
+            <p class="post-card__date">2 de diciembre, 2024</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="blog-sidebar">
+
+        <div class="sidebar-aviso fade-up">
+          <span class="sidebar-aviso__badge">📋 Aviso</span>
+          <h3>Apertura de agenda Q1 2025</h3>
+          <p>Ya estamos recibiendo solicitudes para proyectos del primer trimestre. Contáctanos pronto para asegurar tu fecha.</p>
+          <a href="index-servicio.html" class="btn btn--primary" style="margin-top:16px;font-size:.8rem;">Reservar fecha →</a>
+        </div>
+
+        <div class="sidebar-widget fade-up">
+          <p class="sidebar-widget__title">Categorías</p>
+          <div class="category-list">
+            <a href="#">Avisos oficiales <span>4</span></a>
+            <a href="#">Logros <span>6</span></a>
+            <a href="#">Industria <span>8</span></a>
+            <a href="#">Equipo <span>3</span></a>
+            <a href="#">Vinculación <span>5</span></a>
+            <a href="#">Proyectos <span>12</span></a>
+          </div>
+        </div>
+
+        <div class="sidebar-widget fade-up">
+          <p class="sidebar-widget__title">Últimas noticias</p>
+          <div class="category-list">
+            <a href="#">Nueva certificación AWS D1.1</a>
+            <a href="#">Visita técnica a feria EXPONOR</a>
+            <a href="#">Donación de materiales a escuela técnica</a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__grid">
+      <div><a href="index.html" class="navbar__logo"><div class="navbar__logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v5c0 5.25 3.4 10.15 8 11.35C16.6 22.15 20 17.25 20 12V7L12 2z"/></svg></div><span class="navbar__logo-text">Weld<span>ian</span></span></a><p class="footer__brand-text">Soldadura industrial con estándares de calidad y compromiso.</p></div>
+      <div><p class="footer__heading">Navegación</p><div class="footer__links"><a href="index.html">Inicio</a><a href="index-proyectos.html">Proyectos</a><a href="index-blog.html">Blog</a><a href="index-vinculacion.html">Vinculación</a><a href="index-servicio.html">Contacto</a></div></div>
+      <div><p class="footer__heading">Blog</p><div class="footer__links"><a href="#">Avisos</a><a href="#">Logros</a><a href="#">Industria</a><a href="#">Equipo</a></div></div>
+      <div><p class="footer__heading">Contacto</p><div class="footer__links"><a href="https://wa.me/56900000000">+56 9 0000 0000</a><a href="mailto:contacto@weldian.cl">contacto@weldian.cl</a></div></div>
+    </div>
+    <div class="footer__bottom"><span>© 2025 Weldian. Todos los derechos reservados.</span></div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

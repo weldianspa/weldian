@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinculación — Weldian</title>
+  <meta name="description" content="Cómo Weldian apoya al medioambiente, la comunidad y sus aliados estratégicos." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Impacto cards */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px; margin-bottom: 0;
+    }
+    .impact-card {
+      border-radius: 10px; overflow: hidden;
+      position: relative;
+    }
+    .impact-card__bg {
+      aspect-ratio: 3/2;
+      display: flex; align-items: flex-end;
+      padding: 24px;
+      position: relative;
+    }
+    .impact-card__bg--azul { background: linear-gradient(135deg, #1C2638, #2d4565); }
+    .impact-card__bg--verde { background: linear-gradient(135deg, #1a3d2b, #2d6045); }
+    .impact-card__bg--dorado { background: linear-gradient(135deg, #4a3418, #8A6B3F); }
+    .impact-card__icon {
+      position: absolute; top: 24px; right: 24px;
+      font-size: 2.2rem; opacity: .7;
+    }
+    .impact-card__content { position: relative; z-index: 1; }
+    .impact-card__label {
+      font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(255,255,255,.6); margin-bottom: 6px;
+    }
+    .impact-card__title {
+      font-family: var(--fuente-display); font-size: 1.2rem; color: var(--blanco);
+      line-height: 1.25;
+    }
+    .impact-card__body { padding: 24px; background: var(--blanco); border: 1px solid var(--gris-borde); border-top: none; border-radius: 0 0 10px 10px; }
+    .impact-card__text { font-size: .88rem; color: var(--gris-oscuro); line-height: 1.75; }
+
+    /* Alianzas */
+    .allies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .ally-card {
+      border: 1.5px solid var(--gris-borde); border-radius: 8px;
+      padding: 28px 24px;
+      transition: all var(--transicion);
+    }
+    .ally-card:hover { border-color: var(--dorado); box-shadow: 0 4px 20px rgba(138,107,63,.1); }
+    .ally-card__logo {
+      width: 56px; height: 56px; border-radius: 8px;
+      background: var(--gris-claro); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; font-size: 1.5rem;
+    }
+    .ally-card__name { font-weight: 700; font-size: .95rem; margin-bottom: 4px; }
+    .ally-card__type {
+      font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--dorado); margin-bottom: 12px;
+    }
+    .ally-card__desc { font-size: .83rem; color: var(--gris-oscuro); line-height: 1.7; }
+
+    /* Compromisos timeline */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 9px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--gris-borde);
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 36px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -32px; top: 6px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--blanco); border: 2.5px solid var(--dorado);
+      z-index: 1;
+    }
+    .timeline-item h3 {
+      font-family: var(--fuente-display); font-size: 1.05rem; margin-bottom: 8px;
+    }
+    .timeline-item p { font-size: .88rem; color: var(--gris-oscuro); line-height: 1.75; }
+    .timeline-item .year {
+      font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--dorado); margin-bottom: 6px;
+    }
+
+    /* Medioambiente banner */
+    .eco-banner {
+      background: linear-gradient(135deg, #1a3d2b, #2d5a3d);
+      border-radius: 12px; padding: 56px 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .eco-banner__title {
+      font-family: var(--fuente-display); font-size: 1.8rem; color: var(--blanco);
+      margin-bottom: 14px; line-height: 1.2;
+    }
+    .eco-banner__text { color: rgba(255,255,255,.7); font-size: .92rem; line-height: 1.8; margin-bottom: 24px; }
+    .eco-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+    .eco-stat strong {
+      display: block; font-family: var(--fuente-display); font-size: 1.8rem;
+      color: #7ecf9a; line-height: 1;
+    }
+    .eco-stat span { font-size: .75rem; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .06em; }
+
+    @media (max-width: 720px) {
+      .eco-banner { grid-template-columns: 1fr; padding: 36px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="navbar__logo">
+      <div class="navbar__logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v5c0 5.25 3.4 10.15 8 11.35C16.6 22.15 20 17.25 20 12V7L12 2z"/></svg></div>
+      <span class="navbar__logo-text">Weld<span>ian</span></span>
+    </a>
+    <ul class="navbar__links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index-proyectos.html">Proyectos</a></li>
+      <li><a href="index-blog.html">Blog</a></li>
+      <li><a href="index-vinculacion.html" class="active">Vinculación</a></li>
+      <li><a href="index-servicio.html" class="navbar__cta">Contacto</a></li>
+    </ul>
+    <button class="navbar__hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="navbar__mobile" id="mobileMenu">
+    <a href="index.html">Inicio</a><a href="index-proyectos.html">Proyectos</a>
+    <a href="index-blog.html">Blog</a><a href="index-vinculacion.html">Vinculación</a>
+    <a href="index-servicio.html">Contacto</a>
+  </div>
+
+  <div class="page-header">
+    <p class="page-header__label">Impacto & Alianzas</p>
+    <h1 class="page-header__title">Vinculación con el Entorno</h1>
+    <p class="page-header__desc">En Weldian creemos que una empresa responsable construye hacia afuera también. Aquí está nuestro compromiso.</p>
+  </div>
+
+  <!-- Áreas de impacto -->
+  <section class="section">
+    <p class="section__label fade-up">Nuestro impacto</p>
+    <h2 class="section__title fade-up">Tres ejes de acción</h2>
+    <p class="section__subtitle fade-up">Nos vinculamos con el entorno desde tres frentes concretos y medibles.</p>
+
+    <div class="impact-grid fade-up">
+      <div class="impact-card">
+        <div class="impact-card__bg impact-card__bg--verde">
+          <div class="impact-card__icon">🌱</div>
+          <div class="impact-card__content">
+            <p class="impact-card__label">Eje ambiental</p>
+            <h3 class="impact-card__title">Sostenibilidad activa</h3>
+          </div>
+        </div>
+        <div class="impact-card__body">
+          <p class="impact-card__text">Gestionamos los residuos metálicos, usamos gases inertes con eficiencia certificada y minimizamos el consumo energético en nuestro taller. Participamos en programas de reciclaje industrial y compensamos emisiones con forestación.</p>
+        </div>
+      </div>
+
+      <div class="impact-card">
+        <div class="impact-card__bg impact-card__bg--azul">
+          <div class="impact-card__icon">🏫</div>
+          <div class="impact-card__content">
+            <p class="impact-card__label">Eje educativo</p>
+            <h3 class="impact-card__title">Formación técnica</h3>
+          </div>
+        </div>
+        <div class="impact-card__body">
+          <p class="impact-card__text">Abrimos nuestras puertas a estudiantes de CFT e institutos técnicos para prácticas en terreno real. Donamos materiales e insumos a escuelas técnicas y participamos como empresa mentora en programas de empleabilidad juvenil.</p>
+        </div>
+      </div>
+
+      <div class="impact-card">
+        <div class="impact-card__bg impact-card__bg--dorado">
+          <div class="impact-card__icon">🤝</div>
+          <div class="impact-card__content">
+            <p class="impact-card__label">Eje comunitario</p>
+            <h3 class="impact-card__title">Apoyo local</h3>
+          </div>
+        </div>
+        <div class="impact-card__body">
+          <p class="impact-card__text">Priorizamos proveedores locales y pequeñas empresas de la zona. Participamos en ferias industriales, talleres de capacitación abiertos a la comunidad y apoyamos causas sociales del sector en que operamos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner medioambiente -->
+  <section class="section section--gray">
+    <div class="eco-banner fade-up">
+      <div>
+        <h2 class="eco-banner__title">Comprometidos con el planeta, no solo con el metal</h2>
+        <p class="eco-banner__text">Implementamos buenas prácticas ambientales en cada etapa del proceso productivo, desde la compra de insumos hasta la disposición de residuos. Nuestro taller opera bajo los lineamientos de la norma ISO 14001.</p>
+        <a href="index-servicio.html" class="btn btn--primary">Conoce más →</a>
+      </div>
+      <div>
+        <div class="eco-stats">
+          <div class="eco-stat"><strong>85%</strong><span>Residuos reciclados</span></div>
+          <div class="eco-stat"><strong>0</strong><span>Vertidos contaminantes</span></div>
+          <div class="eco-stat"><strong>30+</strong><span>Árboles plantados</span></div>
+          <div class="eco-stat"><strong>ISO</strong><span>14001 en proceso</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compromisos timeline -->
+  <section class="section">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;">
+      <div>
+        <p class="section__label fade-up">Hoja de ruta</p>
+        <h2 class="section__title fade-up" style="font-size:1.7rem;">Nuestros compromisos<br>en el tiempo</h2>
+        <p style="color:var(--gris-oscuro);font-size:.9rem;margin-bottom:40px;" class="fade-up">Lo que ya hicimos y lo que viene.</p>
+        <div class="timeline fade-up">
+          <div class="timeline-item">
+            <p class="year">2022</p>
+            <h3>Programa de prácticas técnicas</h3>
+            <p>Inicio del convenio con INACAP para recibir estudiantes de soldadura y construcción metálica en prácticas remuneradas.</p>
+          </div>
+          <div class="timeline-item">
+            <p class="year">2023</p>
+            <h3>Gestión de residuos certificada</h3>
+            <p>Contrato con empresa certificada para gestión de virutas metálicas y residuos peligrosos generados en taller.</p>
+          </div>
+          <div class="timeline-item">
+            <p class="year">2024</p>
+            <h3>Primera donación de equipos</h3>
+            <p>Donación de equipos de soldadura a escuela técnica municipal de Pudahuel para fortalecer la formación en el oficio.</p>
+          </div>
+          <div class="timeline-item">
+            <p class="year">2025 →</p>
+            <h3>Certificación ISO 14001</h3>
+            <p>En proceso de implementación del sistema de gestión ambiental bajo norma ISO 14001 para nuestro taller principal.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alianzas -->
+      <div>
+        <p class="section__label fade-up">Alianzas estratégicas</p>
+        <h2 class="section__title fade-up" style="font-size:1.7rem;">Quienes nos acompañan</h2>
+        <p style="color:var(--gris-oscuro);font-size:.9rem;margin-bottom:32px;" class="fade-up">Construimos relaciones de largo plazo con organizaciones que comparten nuestros valores.</p>
+        <div class="allies-grid fade-up">
+          <div class="ally-card">
+            <div class="ally-card__logo">🏫</div>
+            <p class="ally-card__name">INACAP</p>
+            <p class="ally-card__type">Educación técnica</p>
+            <p class="ally-card__desc">Convenio de prácticas profesionales para estudiantes de soldadura y construcción metálica.</p>
+          </div>
+          <div class="ally-card">
+            <div class="ally-card__logo">🏭</div>
+            <p class="ally-card__name">Proveedor Acero Norte</p>
+            <p class="ally-card__type">Proveedor estratégico</p>
+            <p class="ally-card__desc">Suministro preferente de materiales con trazabilidad certificada y tiempos de entrega garantizados.</p>
+          </div>
+          <div class="ally-card">
+            <div class="ally-card__logo">🌿</div>
+            <p class="ally-card__name">EcoMetal Chile</p>
+            <p class="ally-card__type">Gestión ambiental</p>
+            <p class="ally-card__desc">Empresa certificada para el reciclaje y disposición responsable de residuos metálicos industriales.</p>
+          </div>
+          <div class="ally-card">
+            <div class="ally-card__logo">📋</div>
+            <p class="ally-card__name">SENCE</p>
+            <p class="ally-card__type">Empleo y capacitación</p>
+            <p class="ally-card__desc">Participación en programas de empleo juvenil y capacitación técnica subsidiada.</p>
+          </div>
+        </div>
+        <div style="margin-top:28px;" class="fade-up">
+          <p style="font-size:.85rem;color:var(--gris-oscuro);margin-bottom:14px;">¿Quieres ser un aliado estratégico de Weldian?</p>
+          <a href="index-servicio.html" class="btn btn--dark">Contáctanos →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <div class="cta-banner__text">
+      <h2>¿Te interesa asociarte con Weldian?</h2>
+      <p>Estamos abiertos a nuevas alianzas con empresas, instituciones y organizaciones comprometidas.</p>
+    </div>
+    <a href="index-servicio.html" class="btn btn--white">Conversemos →</a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__grid">
+      <div><a href="index.html" class="navbar__logo"><div class="navbar__logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v5c0 5.25 3.4 10.15 8 11.35C16.6 22.15 20 17.25 20 12V7L12 2z"/></svg></div><span class="navbar__logo-text">Weld<span>ian</span></span></a><p class="footer__brand-text">Soldadura industrial con estándares de calidad y compromiso.</p></div>
+      <div><p class="footer__heading">Navegación</p><div class="footer__links"><a href="index.html">Inicio</a><a href="index-proyectos.html">Proyectos</a><a href="index-blog.html">Blog</a><a href="index-vinculacion.html">Vinculación</a><a href="index-servicio.html">Contacto</a></div></div>
+      <div><p class="footer__heading">Vinculación</p><div class="footer__links"><a href="#">Medioambiente</a><a href="#">Educación</a><a href="#">Comunidad</a><a href="#">Alianzas</a></div></div>
+      <div><p class="footer__heading">Contacto</p><div class="footer__links"><a href="https://wa.me/56900000000">+56 9 0000 0000</a><a href="mailto:contacto@weldian.cl">contacto@weldian.cl</a></div></div>
+    </div>
+    <div class="footer__bottom"><span>© 2025 Weldian. Todos los derechos reservados.</span></div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Responsive vinculacion grid
+    const vgrid = document.querySelector('.section > div[style*="grid-template-columns"]');
+    function checkVgrid() {
+      if (!vgrid) return;
+      if (window.innerWidth < 860) {
+        vgrid.style.gridTemplateColumns = '1fr';
+        vgrid.style.gap = '48px';
+      } else {
+        vgrid.style.gridTemplateColumns = '1fr 1fr';
+        vgrid.style.gap = '72px';
+      }
+    }
+    checkVgrid();
+    window.addEventListener('resize', checkVgrid);
+  </script>
+</body>
+</html>

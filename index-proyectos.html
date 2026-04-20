@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyectos — Weldian</title>
+  <meta name="description" content="Portafolio de proyectos de soldadura industrial, estructuras metálicas y mantención de Weldian." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .filter-bar {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border: 1.5px solid var(--gris-borde);
+      border-radius: 100px;
+      background: transparent;
+      font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+      color: var(--gris-oscuro);
+      transition: all var(--transicion);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--azul); background: var(--azul); color: var(--blanco);
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .project-card {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--gris-borde);
+      background: var(--blanco);
+      transition: box-shadow var(--transicion), transform var(--transicion);
+    }
+    .project-card:hover {
+      box-shadow: 0 12px 40px rgba(28,38,56,.1);
+      transform: translateY(-4px);
+    }
+    .project-card__thumb {
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #1C2638 0%, #253350 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.25); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+      position: relative; overflow: hidden;
+    }
+    .project-card__thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,38,56,.5) 0%, transparent 60%);
+    }
+    .project-card__tag {
+      position: absolute; top: 14px; left: 14px; z-index: 1;
+      background: var(--dorado); color: var(--blanco);
+      font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 100px;
+    }
+    .project-card__body { padding: 24px; }
+    .project-card__title {
+      font-family: var(--fuente-display); font-size: 1.1rem; margin-bottom: 8px;
+    }
+    .project-card__desc { font-size: .88rem; color: var(--gris-oscuro); line-height: 1.7; margin-bottom: 16px; }
+    .project-card__meta {
+      display: flex; gap: 16px; font-size: .78rem; color: var(--gris-oscuro);
+      border-top: 1px solid var(--gris-borde); padding-top: 14px;
+    }
+    .project-card__meta span { display: flex; align-items: center; gap: 5px; }
+
+    /* Featured project */
+    .project-featured {
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--gris-borde);
+      display: grid; grid-template-columns: 1fr 1fr;
+      margin-bottom: 48px;
+    }
+    .project-featured__thumb {
+      background: linear-gradient(135deg, #1C2638, #3a5070);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.2); min-height: 340px;
+      font-size: .85rem; letter-spacing: .1em;
+    }
+    .project-featured__body {
+      padding: 48px 40px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .project-featured__badge {
+      display: inline-block;
+      background: var(--gris-claro);
+      color: var(--dorado);
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px; margin-bottom: 16px;
+    }
+    .project-featured__title {
+      font-family: var(--fuente-display); font-size: 1.6rem;
+      line-height: 1.2; margin-bottom: 14px;
+    }
+    .project-featured__text { font-size: .92rem; color: var(--gris-oscuro); line-height: 1.8; margin-bottom: 24px; }
+    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .tag {
+      font-size: .75rem; font-weight: 600; letter-spacing: .05em;
+      padding: 4px 12px; border-radius: 4px;
+      background: var(--gris-claro); color: var(--azul);
+    }
+    @media (max-width: 720px) {
+      .project-featured { grid-template-columns: 1fr; }
+      .project-featured__thumb { min-height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="navbar__logo">
+      <div class="navbar__logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v5c0 5.25 3.4 10.15 8 11.35C16.6 22.15 20 17.25 20 12V7L12 2z"/></svg></div>
+      <span class="navbar__logo-text">Weld<span>ian</span></span>
+    </a>
+    <ul class="navbar__links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index-proyectos.html" class="active">Proyectos</a></li>
+      <li><a href="index-blog.html">Blog</a></li>
+      <li><a href="index-vinculacion.html">Vinculación</a></li>
+      <li><a href="index-servicio.html" class="navbar__cta">Contacto</a></li>
+    </ul>
+    <button class="navbar__hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="navbar__mobile" id="mobileMenu">
+    <a href="index.html">Inicio</a><a href="index-proyectos.html">Proyectos</a>
+    <a href="index-blog.html">Blog</a><a href="index-vinculacion.html">Vinculación</a>
+    <a href="index-servicio.html">Contacto</a>
+  </div>
+
+  <div class="page-header">
+    <p class="page-header__label">Portafolio</p>
+    <h1 class="page-header__title">Nuestros Proyectos</h1>
+    <p class="page-header__desc">Cada obra que entregamos refleja nuestros estándares de calidad y el compromiso con cada cliente.</p>
+  </div>
+
+  <section class="section">
+    <!-- Proyecto Destacado -->
+    <p class="section__label fade-up">Proyecto destacado</p>
+    <div class="project-featured fade-up">
+      <div class="project-featured__thumb">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Proyecto principal ejemplo" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+      <div class="project-featured__body">
+        <span class="project-featured__badge">⭐ Proyecto destacado</span>
+        <h2 class="project-featured__title">Estructura Metálica Bodega Industrial — Región Metropolitana</h2>
+        <p class="project-featured__text">Diseño, fabricación y montaje de estructura metálica de 2.400 m² para bodega industrial. Incluye cerchas, correas, pilares HEB y cubierta completa con acero ASTM A36.</p>
+        <div class="project-tags">
+          <span class="tag">Estructuras</span>
+          <span class="tag">MIG/MAG</span>
+          <span class="tag">ASTM A36</span>
+          <span class="tag">Montaje en terreno</span>
+        </div>
+        <a href="index-servicio.html" class="btn btn--dark">Cotizar similar →</a>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filter-bar fade-up">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="estructura">Estructuras</button>
+      <button class="filter-btn" data-filter="mantencion">Mantención</button>
+      <button class="filter-btn" data-filter="especial">Proyectos Especiales</button>
+      <button class="filter-btn" data-filter="industrial">Industrial</button>
+    </div>
+
+    <!-- Grid proyectos -->
+    <div class="projects-grid">
+
+      <div class="project-card fade-up" data-cat="estructura">
+        <div class="project-card__thumb">
+          <span class="project-card__tag">Estructura</span>
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 1" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Pasarela metálica planta Quilicura</h3>
+          <p class="project-card__desc">Fabricación y montaje de pasarela de acceso operativo en acero inoxidable 304 con baranda anti-corrosiva.</p>
+          <div class="project-card__meta">
+            <span>📍 Quilicura, RM</span>
+            <span>🔧 TIG · Inox 304</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" data-cat="mantencion" style="transition-delay:.1s">
+        <div class="project-card__thumb">
+          <span class="project-card__tag">Mantención</span>
+          <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 2" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Mantención tuberías planta minera</h3>
+          <p class="project-card__desc">Reparación y reemplazo de tramos de tubería de alta presión en acero al carbono. Proceso SMAW con control de calidad radiográfico.</p>
+          <div class="project-card__meta">
+            <span>📍 Pudahuel, RM</span>
+            <span>🔧 SMAW · NDT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" data-cat="especial" style="transition-delay:.2s">
+        <div class="project-card__thumb">
+          <span class="project-card__tag">Especial</span>
+          <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 3" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Fabricación de tolvas agrícolas</h3>
+          <p class="project-card__desc">Serie de 12 tolvas cónicas en acero ASTM A572 para almacenamiento de grano. Diseño, corte, armado y soldadura en taller Weldian.</p>
+          <div class="project-card__meta">
+            <span>📍 Región O'Higgins</span>
+            <span>🔧 MIG · A572 Gr50</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" data-cat="industrial" style="transition-delay:.3s">
+        <div class="project-card__thumb">
+          <span class="project-card__tag">Industrial</span>
+          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 4" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Revestimiento anticorrosivo tanques</h3>
+          <p class="project-card__desc">Reparación estructural y aplicación de soldadura de revestimiento en 6 tanques de almacenamiento de combustible.</p>
+          <div class="project-card__meta">
+            <span>📍 San Bernardo, RM</span>
+            <span>🔧 FCAW · Hardfacing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" data-cat="estructura" style="transition-delay:.1s">
+        <div class="project-card__thumb">
+          <span class="project-card__tag">Estructura</span>
+          <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3a8b?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 5" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Mezanine industrial 3 niveles</h3>
+          <p class="project-card__desc">Diseño y construcción de mezanine de 3 niveles para optimización de espacio en bodega de distribución logística.</p>
+          <div class="project-card__meta">
+            <span>📍 Maipú, RM</span>
+            <span>🔧 MIG/MAG · HEB200</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" data-cat="especial" style="transition-delay:.2s">
+        <div class="project-card__thumb">
+          <span class="project-card__tag">Especial</span>
+          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 6" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Portón corredizo automatizado</h3>
+          <p class="project-card__desc">Fabricación a medida de portón corredizo en perfil cuadrado con automatización y acabado pintado epóxico.</p>
+          <div class="project-card__meta">
+            <span>📍 Providencia, RM</span>
+            <span>🔧 MIG · Perfil 50x50</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <div class="cta-banner__text">
+      <h2>¿Tienes un proyecto similar?</h2>
+      <p>Cuéntanos los detalles y te preparamos una cotización personalizada.</p>
+    </div>
+    <a href="index-servicio.html" class="btn btn--white">Solicitar cotización →</a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__grid">
+      <div>
+        <a href="index.html" class="navbar__logo"><div class="navbar__logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v5c0 5.25 3.4 10.15 8 11.35C16.6 22.15 20 17.25 20 12V7L12 2z"/></svg></div><span class="navbar__logo-text">Weld<span>ian</span></span></a>
+        <p class="footer__brand-text">Soldadura industrial con estándares de calidad y compromiso.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        </div>
+      </div>
+      <div><p class="footer__heading">Navegación</p><div class="footer__links"><a href="index.html">Inicio</a><a href="index-proyectos.html">Proyectos</a><a href="index-blog.html">Blog</a><a href="index-vinculacion.html">Vinculación</a><a href="index-servicio.html">Contacto</a></div></div>
+      <div><p class="footer__heading">Categorías</p><div class="footer__links"><a href="#">Estructuras</a><a href="#">Mantención</a><a href="#">Especiales</a><a href="#">Industrial</a></div></div>
+      <div><p class="footer__heading">Contacto</p><div class="footer__links"><a href="https://wa.me/56900000000">+56 9 0000 0000</a><a href="mailto:contacto@weldian.cl">contacto@weldian.cl</a></div></div>
+    </div>
+    <div class="footer__bottom"><span>© 2025 Weldian. Todos los derechos reservados.</span></div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Filtros de proyectos
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.project-card').forEach(card => {
+          const match = filter === 'all' || card.dataset.cat === filter;
+          card.style.display = match ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
