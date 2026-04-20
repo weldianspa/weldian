@@ -106,10 +106,35 @@
       .project-featured { grid-template-columns: 1fr; }
       .project-featured__thumb { min-height: 220px; }
     }
+  <style>
+    #map {
+      width: 100%;
+      max-width: 900px;
+      min-width: 220px;
+      height: 340px;
+      border-radius: 16px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      display: block;
+    }
+    .leaflet-container {
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 16px;
+    }
+    .leaflet-marker-icon { filter: hue-rotate(-20deg) saturate(2) brightness(1.1); }
+    @media (max-width: 600px) {
+      #map { height: 220px; max-width: 100vw; }
+    }
   </style>
 </head>
 <body>
+  <!-- Bloque visual de proyectos -->
+  <section style="padding:0;background:none;margin:0 0 32px 0;">
+    <img src="IMG/proyectos.png" alt="Proyectos Weldian" style="width:100vw;min-width:100%;display:block;object-fit:cover;border-radius:0;margin:32px 0 0 0;box-shadow:0 4px 32px rgba(28,38,56,0.10);" />
+  </section>
 
+  <!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
   <nav class="navbar" id="navbar">
     <a href="index.html" class="navbar__logo">
       <div class="navbar__logo-mark">
@@ -132,175 +157,224 @@
     <a href="index-blog.html">Blog</a>
   </div>
 
-  <div class="page-header">
-    <p class="page-header__label">Portafolio</p>
-    <h1 class="page-header__title">Nuestros Proyectos</h1>
-    <p class="page-header__desc">Cada obra que entregamos refleja nuestros estándares de calidad y el compromiso con cada cliente.</p>
-  </div>
-
+  <!-- Grilla de proyectos -->
   <section class="section">
-    <!-- Proyecto Destacado -->
-    <p class="section__label fade-up">Proyecto destacado</p>
-    <div class="project-featured fade-up">
-      <div class="project-featured__thumb">
-        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Proyecto principal ejemplo" style="width:100%;height:100%;object-fit:cover;" />
-      </div>
-      <div class="project-featured__body">
-        <span class="project-featured__badge">⭐ Proyecto destacado</span>
-        <h2 class="project-featured__title">Estructura Metálica Bodega Industrial — Región Metropolitana</h2>
-        <p class="project-featured__text">Diseño, fabricación y montaje de estructura metálica de 2.400 m² para bodega industrial. Incluye cerchas, correas, pilares HEB y cubierta completa con acero ASTM A36.</p>
-        <div class="project-tags">
-          <span class="tag">Estructuras</span>
-          <span class="tag">MIG/MAG</span>
-          <span class="tag">ASTM A36</span>
-          <span class="tag">Montaje en terreno</span>
-        </div>
-        <a href="index-servicio.html" class="btn btn--dark">Cotizar similar →</a>
-      </div>
-    </div>
-
-    <!-- Filtros -->
-    <div class="filter-bar fade-up">
-      <button class="filter-btn active" data-filter="all">Todos</button>
-      <button class="filter-btn" data-filter="estructura">Estructuras</button>
-      <button class="filter-btn" data-filter="mantencion">Mantención</button>
-      <button class="filter-btn" data-filter="especial">Proyectos Especiales</button>
-      <button class="filter-btn" data-filter="industrial">Industrial</button>
-    </div>
-
-    <!-- Grid proyectos -->
+    <h2 class="section__title" style="text-align:center;margin-bottom:32px;">Proyectos realizados</h2>
     <div class="projects-grid">
-
-      <div class="project-card fade-up" data-cat="estructura">
-        <div class="project-card__thumb">
-          <span class="project-card__tag">Estructura</span>
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 1" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
+      <!-- 30 bloques de proyectos -->
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/galpon industrial.png" alt="Galpón industrial" /></div>
         <div class="project-card__body">
-          <h3 class="project-card__title">Pasarela metálica planta Quilicura</h3>
-          <p class="project-card__desc">Fabricación y montaje de pasarela de acceso operativo en acero inoxidable 304 con baranda anti-corrosiva.</p>
-          <div class="project-card__meta">
-            <span>📍 Quilicura, RM</span>
-            <span>🔧 TIG · Inox 304</span>
-          </div>
+          <h3 class="project-card__title">Galpón Industrial Cerrado</h3>
+          <p class="project-card__desc">Montaje completo de galpón cerrado para almacenaje de maquinaria pesada.</p>
+          <div class="project-card__meta"><span>📍 Quilicura</span><span>2025</span></div>
         </div>
       </div>
-
-      <div class="project-card fade-up" data-cat="mantencion" style="transition-delay:.1s">
-        <div class="project-card__thumb">
-          <span class="project-card__tag">Mantención</span>
-          <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 2" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/Galpón metálico.png" alt="Galpón metálico" /></div>
         <div class="project-card__body">
-          <h3 class="project-card__title">Mantención tuberías planta minera</h3>
-          <p class="project-card__desc">Reparación y reemplazo de tramos de tubería de alta presión en acero al carbono. Proceso SMAW con control de calidad radiográfico.</p>
-          <div class="project-card__meta">
-            <span>📍 Pudahuel, RM</span>
-            <span>🔧 SMAW · NDT</span>
-          </div>
+          <h3 class="project-card__title">Galpón Metálico Agrícola</h3>
+          <p class="project-card__desc">Estructura metálica para resguardo de insumos agrícolas y vehículos.</p>
+          <div class="project-card__meta"><span>📍 Paine</span><span>2025</span></div>
         </div>
       </div>
-
-      <div class="project-card fade-up" data-cat="especial" style="transition-delay:.2s">
-        <div class="project-card__thumb">
-          <span class="project-card__tag">Especial</span>
-          <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 3" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/barandas.png" alt="Barandas metálicas" /></div>
         <div class="project-card__body">
-          <h3 class="project-card__title">Fabricación de tolvas agrícolas</h3>
-          <p class="project-card__desc">Serie de 12 tolvas cónicas en acero ASTM A572 para almacenamiento de grano. Diseño, corte, armado y soldadura en taller Weldian.</p>
-          <div class="project-card__meta">
-            <span>📍 Región O'Higgins</span>
-            <span>🔧 MIG · A572 Gr50</span>
-          </div>
+          <h3 class="project-card__title">Barandas de Seguridad</h3>
+          <p class="project-card__desc">Instalación de barandas metálicas en edificio de oficinas para protección de personal.</p>
+          <div class="project-card__meta"><span>📍 Providencia</span><span>2026</span></div>
         </div>
       </div>
-
-      <div class="project-card fade-up" data-cat="industrial" style="transition-delay:.3s">
-        <div class="project-card__thumb">
-          <span class="project-card__tag">Industrial</span>
-          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 4" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/barandasdeterraza.png" alt="Barandas de terraza" /></div>
         <div class="project-card__body">
-          <h3 class="project-card__title">Revestimiento anticorrosivo tanques</h3>
-          <p class="project-card__desc">Reparación estructural y aplicación de soldadura de revestimiento en 6 tanques de almacenamiento de combustible.</p>
-          <div class="project-card__meta">
-            <span>📍 San Bernardo, RM</span>
-            <span>🔧 FCAW · Hardfacing</span>
-          </div>
+          <h3 class="project-card__title">Barandas de Terraza</h3>
+          <p class="project-card__desc">Barandas de acero galvanizado para terrazas de edificio residencial.</p>
+          <div class="project-card__meta"><span>📍 Ñuñoa</span><span>2026</span></div>
         </div>
       </div>
-
-      <div class="project-card fade-up" data-cat="estructura" style="transition-delay:.1s">
-        <div class="project-card__thumb">
-          <span class="project-card__tag">Estructura</span>
-          <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3a8b?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 5" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/escaleras.png" alt="Escaleras metálicas" /></div>
         <div class="project-card__body">
-          <h3 class="project-card__title">Mezanine industrial 3 niveles</h3>
-          <p class="project-card__desc">Diseño y construcción de mezanine de 3 niveles para optimización de espacio en bodega de distribución logística.</p>
-          <div class="project-card__meta">
-            <span>📍 Maipú, RM</span>
-            <span>🔧 MIG/MAG · HEB200</span>
-          </div>
+          <h3 class="project-card__title">Escalera Metálica Industrial</h3>
+          <p class="project-card__desc">Fabricación e instalación de escalera metálica para acceso a segundo piso en planta industrial.</p>
+          <div class="project-card__meta"><span>📍 San Bernardo</span><span>2025</span></div>
         </div>
       </div>
-
-      <div class="project-card fade-up" data-cat="especial" style="transition-delay:.2s">
-        <div class="project-card__thumb">
-          <span class="project-card__tag">Especial</span>
-          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Proyecto ejemplo 6" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/soldaduraunida.png" alt="Uniones soldadas" /></div>
         <div class="project-card__body">
-          <h3 class="project-card__title">Portón corredizo automatizado</h3>
-          <p class="project-card__desc">Fabricación a medida de portón corredizo en perfil cuadrado con automatización y acabado pintado epóxico.</p>
-          <div class="project-card__meta">
-            <span>📍 Providencia, RM</span>
-            <span>🔧 MIG · Perfil 50x50</span>
-          </div>
+          <h3 class="project-card__title">Uniones Soldadas de Precisión</h3>
+          <p class="project-card__desc">Soldadura de uniones críticas en estructura de edificio en altura.</p>
+          <div class="project-card__meta"><span>📍 Santiago Centro</span><span>2026</span></div>
         </div>
       </div>
-
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/boqueprimerop.png" alt="Quincho metálico" /></div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Quincho Metálico</h3>
+          <p class="project-card__desc">Construcción de quincho metálico con parrilla y cubierta en patio residencial.</p>
+          <div class="project-card__meta"><span>📍 La Florida</span><span>2025</span></div>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/bloquesegundo.png" alt="Marcos metálicos" /></div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Marcos Metálicos para Ventanas</h3>
+          <p class="project-card__desc">Fabricación de marcos de acero para ventanas de edificio comercial.</p>
+          <div class="project-card__meta"><span>📍 Las Condes</span><span>2026</span></div>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/plano.png" alt="Subterráneo" /></div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Estructura Subterránea</h3>
+          <p class="project-card__desc">Montaje de estructura metálica para estacionamiento subterráneo en edificio corporativo.</p>
+          <div class="project-card__meta"><span>📍 Vitacura</span><span>2025</span></div>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/proyecto3.png" alt="Escalera de emergencia" /></div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Escalera de Emergencia</h3>
+          <p class="project-card__desc">Instalación de escalera de emergencia metálica en colegio particular.</p>
+          <div class="project-card__meta"><span>📍 Independencia</span><span>2026</span></div>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-card__thumb"><img src="IMG/proyecto4.png" alt="Barandas industriales" /></div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Barandas Industriales</h3>
+          <p class="project-card__desc">Barandas de protección para maquinaria en planta de producción.</p>
+          <div class="project-card__meta"><span>📍 Cerrillos</span><span>2025</span></div>
+        </div>
+      </div>
+      <!-- 20 bloques adicionales generados con variaciones -->
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/galpon industrial.png" alt="Galpón" /></div><div class="project-card__body"><h3 class="project-card__title">Galpón Logístico</h3><p class="project-card__desc">Estructura para centro de distribución de paquetería.</p><div class="project-card__meta"><span>📍 Renca</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/barandasdeterraza.png" alt="Barandas" /></div><div class="project-card__body"><h3 class="project-card__title">Barandas de Escalera</h3><p class="project-card__desc">Barandas metálicas para escalera de acceso en edificio público.</p><div class="project-card__meta"><span>📍 Recoleta</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/escaleras.png" alt="Escalera" /></div><div class="project-card__body"><h3 class="project-card__title">Escalera Caracol</h3><p class="project-card__desc">Escalera caracol metálica para acceso a azotea.</p><div class="project-card__meta"><span>📍 Macul</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/barandas.png" alt="Barandas" /></div><div class="project-card__body"><h3 class="project-card__title">Barandas para Subterráneo</h3><p class="project-card__desc">Barandas de acero inoxidable en estacionamiento subterráneo.</p><div class="project-card__meta"><span>📍 Estación Central</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/boqueprimerop.png" alt="Quincho" /></div><div class="project-card__body"><h3 class="project-card__title">Quincho Familiar</h3><p class="project-card__desc">Quincho metálico con parrilla y cubierta para condominio.</p><div class="project-card__meta"><span>📍 Peñalolén</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/bloquesegundo.png" alt="Marcos" /></div><div class="project-card__body"><h3 class="project-card__title">Marcos para Puertas</h3><p class="project-card__desc">Marcos metálicos reforzados para puertas de seguridad.</p><div class="project-card__meta"><span>📍 La Reina</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/plano.png" alt="Subterráneo" /></div><div class="project-card__body"><h3 class="project-card__title">Refuerzo Subterráneo</h3><p class="project-card__desc">Refuerzo estructural en subterráneo de edificio corporativo.</p><div class="project-card__meta"><span>📍 Lo Barnechea</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/proyecto3.png" alt="Escalera" /></div><div class="project-card__body"><h3 class="project-card__title">Escalera de Servicio</h3><p class="project-card__desc">Escalera metálica de servicio para galpón industrial.</p><div class="project-card__meta"><span>📍 San Miguel</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/proyecto4.png" alt="Barandas" /></div><div class="project-card__body"><h3 class="project-card__title">Barandas para Rampa</h3><p class="project-card__desc">Barandas metálicas para rampa de acceso universal.</p><div class="project-card__meta"><span>📍 Puente Alto</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/galpon industrial.png" alt="Galpón" /></div><div class="project-card__body"><h3 class="project-card__title">Galpón para Taller</h3><p class="project-card__desc">Galpón metálico para taller de mantención de vehículos.</p><div class="project-card__meta"><span>📍 La Cisterna</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/barandasdeterraza.png" alt="Barandas" /></div><div class="project-card__body"><h3 class="project-card__title">Barandas para Balcón</h3><p class="project-card__desc">Barandas de acero para balcones de edificio residencial.</p><div class="project-card__meta"><span>📍 San Joaquín</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/escaleras.png" alt="Escalera" /></div><div class="project-card__body"><h3 class="project-card__title">Escalera Industrial</h3><p class="project-card__desc">Escalera metálica para acceso a maquinaria pesada.</p><div class="project-card__meta"><span>📍 Pedro Aguirre Cerda</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/barandas.png" alt="Barandas" /></div><div class="project-card__body"><h3 class="project-card__title">Barandas para Pasarela</h3><p class="project-card__desc">Barandas de protección en pasarela peatonal.</p><div class="project-card__meta"><span>📍 Huechuraba</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/boqueprimerop.png" alt="Quincho" /></div><div class="project-card__body"><h3 class="project-card__title">Quincho de Acero</h3><p class="project-card__desc">Quincho metálico con cubierta y parrilla para condominio.</p><div class="project-card__meta"><span>📍 El Bosque</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/bloquesegundo.png" alt="Marcos" /></div><div class="project-card__body"><h3 class="project-card__title">Marcos para Ventanas</h3><p class="project-card__desc">Marcos metálicos para ventanas de edificio comercial.</p><div class="project-card__meta"><span>📍 Conchalí</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/plano.png" alt="Subterráneo" /></div><div class="project-card__body"><h3 class="project-card__title">Estructura para Subterráneo</h3><p class="project-card__desc">Estructura metálica para estacionamiento subterráneo.</p><div class="project-card__meta"><span>📍 Lo Prado</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/proyecto3.png" alt="Escalera" /></div><div class="project-card__body"><h3 class="project-card__title">Escalera para Bodega</h3><p class="project-card__desc">Escalera metálica para acceso a bodega industrial.</p><div class="project-card__meta"><span>📍 Quinta Normal</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/proyecto4.png" alt="Barandas" /></div><div class="project-card__body"><h3 class="project-card__title">Barandas para Escalera</h3><p class="project-card__desc">Barandas metálicas para escalera de edificio público.</p><div class="project-card__meta"><span>📍 Cerrillos</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/galpon industrial.png" alt="Galpón" /></div><div class="project-card__body"><h3 class="project-card__title">Galpón para Almacenaje</h3><p class="project-card__desc">Galpón metálico para almacenaje de materiales de construcción.</p><div class="project-card__meta"><span>📍 La Pintana</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/barandasdeterraza.png" alt="Barandas" /></div><div class="project-card__body"><h3 class="project-card__title">Barandas para Terraza</h3><p class="project-card__desc">Barandas de acero para terraza de edificio residencial.</p><div class="project-card__meta"><span>📍 Vitacura</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/escaleras.png" alt="Escalera" /></div><div class="project-card__body"><h3 class="project-card__title">Escalera para Subterráneo</h3><p class="project-card__desc">Escalera metálica para acceso a subterráneo de edificio corporativo.</p><div class="project-card__meta"><span>📍 Las Condes</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/barandas.png" alt="Barandas" /></div><div class="project-card__body"><h3 class="project-card__title">Barandas para Oficina</h3><p class="project-card__desc">Barandas metálicas para oficinas administrativas.</p><div class="project-card__meta"><span>📍 Santiago Centro</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/boqueprimerop.png" alt="Quincho" /></div><div class="project-card__body"><h3 class="project-card__title">Quincho Empresarial</h3><p class="project-card__desc">Quincho metálico para área de descanso en empresa.</p><div class="project-card__meta"><span>📍 Macul</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/bloquesegundo.png" alt="Marcos" /></div><div class="project-card__body"><h3 class="project-card__title">Marcos para Fachada</h3><p class="project-card__desc">Marcos metálicos para fachada de edificio comercial.</p><div class="project-card__meta"><span>📍 Providencia</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/plano.png" alt="Subterráneo" /></div><div class="project-card__body"><h3 class="project-card__title">Subterráneo de Edificio</h3><p class="project-card__desc">Estructura metálica para subterráneo de edificio residencial.</p><div class="project-card__meta"><span>📍 Ñuñoa</span><span>2026</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/proyecto3.png" alt="Escalera" /></div><div class="project-card__body"><h3 class="project-card__title">Escalera para Quincho</h3><p class="project-card__desc">Escalera metálica para acceso a quincho en azotea.</p><div class="project-card__meta"><span>📍 Peñalolén</span><span>2025</span></div></div></div>
+      <div class="project-card fade-up"><div class="project-card__thumb"><img src="IMG/proyecto4.png" alt="Barandas" /></div><div class="project-card__body"><h3 class="project-card__title">Barandas para Patio</h3><p class="project-card__desc">Barandas metálicas para patio de colegio.</p><div class="project-card__meta"><span>📍 Independencia</span><span>2026</span></div></div></div>
     </div>
   </section>
-
-  <div class="cta-banner">
-    <div class="cta-banner__text">
-      <h2>¿Tienes un proyecto similar?</h2>
-      <p>Cuéntanos los detalles y te preparamos una cotización personalizada.</p>
-    </div>
-    <a href="index-servicio.html" class="btn btn--white">Solicitar cotización →</a>
-  </div>
 
   <footer class="footer">
     <div class="footer__grid">
       <div>
-        <a href="index.html" class="navbar__logo"><div class="navbar__logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v5c0 5.25 3.4 10.15 8 11.35C16.6 22.15 20 17.25 20 12V7L12 2z"/></svg></div><span class="navbar__logo-text">Weld<span>ian</span></span></a>
-        <p class="footer__brand-text">Soldadura industrial con estándares de calidad y compromiso.</p>
+        <a href="index.html" class="navbar__logo">
+          <div class="navbar__logo-mark">
+            <img src="IMG/logo.png" alt="Logo Weldian" style="width:36px;height:36px;object-fit:contain;display:block;" />
+          </div>
+            <span class="navbar__logo-text"><span class="weld-white">Weld</span><span class="ian-gold">ian</span></span>
+        </a>
+        <p class="footer__brand-text">Soluciones de soldadura industrial con estándares de calidad, seguridad y compromiso con el entorno.</p>
         <div class="footer__social">
-          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="https://www.instagram.com/weldianspa/?hl=es" aria-label="Instagram" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="https://wa.me/56964481132" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          <a href="https://www.linkedin.com/in/carlitos-omar-nazario-ruiz-a18262403/" aria-label="LinkedIn" target="_blank"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://github.com/weldianspa" aria-label="GitHub" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.38-2.03 1-2.75-.1-.26-.44-1.3.09-2.7 0 0 .83-.27 2.75 1.02A9.38 9.38 0 0112 6.84c.84.004 1.68.11 2.47.32 1.92-1.29 2.75-1.02 2.75-1.02.53 1.4.19 2.44.09 2.7.62.72 1 1.63 1 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.01 10.01 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg></a>
         </div>
       </div>
-      <div><p class="footer__heading">Navegación</p><div class="footer__links"><a href="index.html">Inicio</a><a href="index-proyectos.html">Proyectos</a><a href="index-blog.html">Blog</a><a href="index-vinculacion.html">Vinculación</a><a href="index-servicio.html">Contacto</a></div></div>
-      <div><p class="footer__heading">Categorías</p><div class="footer__links"><a href="#">Estructuras</a><a href="#">Mantención</a><a href="#">Especiales</a><a href="#">Industrial</a></div></div>
-      <div><p class="footer__heading">Contacto</p><div class="footer__links"><a href="https://wa.me/56900000000">+56 9 0000 0000</a><a href="mailto:contacto@weldian.cl">contacto@weldian.cl</a></div></div>
+      <div>
+        <p class="footer__heading">Navegación</p>
+        <div class="footer__links">
+          <a href="index.html">Inicio</a>
+          <a href="index-proyectos.html">Proyectos</a>
+          <a href="index-blog.html">Blog</a>
+          <a href="index-vinculacion.html">Vinculación</a>
+          <a href="index-servicio.html">Servicio al Cliente</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Servicios</p>
+        <div class="footer__links">
+          <a href="index-proyectos.html">Soldadura Industrial</a>
+          <a href="index-proyectos.html">Estructuras Metálicas</a>
+          <a href="index-proyectos.html">Mantención</a>
+          <a href="index-proyectos.html">Proyectos Especiales</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Contacto</p>
+        <div class="footer__links">
+         <a href="https://wa.me/56964481132">+56 9 6448 1132</a>
+          <a href="https://www.linkedin.com/in/carlitos-omar-nazario-ruiz-a18262403/" target="_blank">LinkedIn</a>
+          <a href="https://www.instagram.com/weldianspa/?hl=es" target="_blank">Instagram</a>
+          <a href="https://github.com/weldianspa" target="_blank">GitHub</a>
+        </div>
+      </div>
     </div>
-    <div class="footer__bottom"><span>© 2025 Weldian. Todos los derechos reservados.</span></div>
-    <a href="index-servicio.html">Contacto</a></div></div>
+    <div class="footer__bottom">
+      <span>© 2026 Weldian. Todos los derechos reservados.</span>
+      <span>Diseñado con precisión y propósito.</span>
+    </div>
+  </footer>
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/56964481132" target="_blank" class="whatsapp-float" aria-label="WhatsApp Weldian">
+    <div class="whatsapp-float-circle">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M22.5 18.7c-.3-.1-1.8-.9-2-1-0.3-.1-.5-.1-.7.2-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2.1-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.2 3.1.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4 0-.1-.3-.2-.6-.3z" fill="#fff"/></svg>
+    </div>
+    <div class="whatsapp-float-text">
+      <strong>ASESORÍA PERSONALIZADA</strong><br>
+      <span>¡Escríbenos por WhatsApp!</span>
+    </div>
+  </a>
 
   <script src="main.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // Filtros de proyectos
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.project-card').forEach(card => {
-          const match = filter === 'all' || card.dataset.cat === filter;
-          card.style.display = match ? '' : 'none';
-        });
-      });
+    // Mapa de Santiago con 50 puntos de presencia
+    const map = L.map('map').setView([-33.45, -70.65], 11);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
+      maxZoom: 18,
+    }).addTo(map);
+    // 50 ubicaciones de ejemplo (coordenadas dentro de Santiago y alrededores)
+    const puntos = [
+      [-33.45, -70.65], [-33.47, -70.68], [-33.44, -70.62], [-33.46, -70.60], [-33.43, -70.67],
+      [-33.48, -70.66], [-33.42, -70.64], [-33.49, -70.63], [-33.41, -70.61], [-33.47, -70.63],
+      [-33.45, -70.69], [-33.46, -70.67], [-33.44, -70.66], [-33.48, -70.62], [-33.43, -70.63],
+      [-33.47, -70.61], [-33.42, -70.68], [-33.49, -70.65], [-33.41, -70.66], [-33.45, -70.62],
+      [-33.46, -70.64], [-33.44, -70.68], [-33.48, -70.60], [-33.43, -70.61], [-33.47, -70.65],
+      [-33.45, -70.67], [-33.46, -70.62], [-33.44, -70.60], [-33.48, -70.68], [-33.43, -70.65],
+      [-33.47, -70.60], [-33.42, -70.62], [-33.49, -70.67], [-33.41, -70.64], [-33.45, -70.63],
+      [-33.46, -70.69], [-33.44, -70.67], [-33.48, -70.64], [-33.43, -70.62], [-33.47, -70.68],
+      [-33.45, -70.61], [-33.46, -70.65], [-33.44, -70.69], [-33.48, -70.66], [-33.43, -70.64],
+      [-33.47, -70.62], [-33.42, -70.60], [-33.49, -70.61], [-33.41, -70.68], [-33.45, -70.68],
+      [-33.46, -70.63]
+    ];
+    puntos.forEach(([lat, lng]) => {
+      L.circleMarker([lat, lng], {
+        radius: 7,
+        color: '#c00',
+        fillColor: '#e22',
+        fillOpacity: 0.85,
+        weight: 2
+      }).addTo(map);
     });
   </script>
 </body>
